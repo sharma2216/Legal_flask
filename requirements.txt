@@ -1,0 +1,12 @@
+transformers
+langchain_community
+chromadb
+pypdf
+sentence_transformers
+pdf2image
+pdf2image
+boto3
+langchain
+awscli
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Document Question Answering</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black; /* Light gray background */
+            color: #343a40; /* Dark font color */
+            padding-top: 70px; /* Add space for fixed navbar */
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: white; 
+            font-style: oblique;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;/* Blue color for the heading */
+        }
+        question-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group label {
+            color: #007bff; /* Blue color for labels */
+        }
+         /* Logo styles */
+
+        #result {
+            margin-top: 20px;
+            color: white;
+        }
+
+        footer {
+            background-color: grey; /* Dark background color for the footer */
+            color: #fff; /* White font color */
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="container">
+        <h1 class="text-center">Legal Document Question Answering</h1>
+        <div class="question-form">
+            <div class="form-group">
+                <label for="question"><big>Ask your question from Legal LLM:</big></label>
+                <input type="text" class="form-control" id="question" name="question">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="askQuestion()">Submit</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function askQuestion() {
+            var question = document.getElementById("question").value;
+            fetch('/ask_question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: question }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response:', data); // Log the response for debugging
+                document.getElementById("result").innerText = data.answer;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
